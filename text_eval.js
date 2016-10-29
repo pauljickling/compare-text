@@ -12,7 +12,28 @@ function test_files() {
       if (file1 === file2) {
         console.log("Files are equivalent!");
       } else {
+        var num;
+        var count = 0;
+        var err_loc1 = [];
+        var err_loc2 = [];
+        if (file1.length < file2.length) {
+          num = file2.length;
+        } else {
+          num = file1.length;
+        }
+        for (var i=0; i < num; i++) {
+          if (file1.charAt(i) !== file2.charAt(i)) {
+            count++;
+            err_loc1.push(file1.charAt(i) + " at position " + i);
+            err_loc2.push(file2.charAt(i) + " at position " + i);
+          }
+        }
         console.log("Files failed test.");
+        console.log("Number of discrepencies: " + count);
+        console.log("Discrepencies in first file:");
+        console.log(err_loc1);
+        console.log("Discrepencies in second file:");
+        console.log(err_loc2);
       }
     });
   });
