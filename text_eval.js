@@ -14,8 +14,9 @@ function test_files() {
       } else {
         var num;
         var count = 0;
-        var err_loc1 = [];
-        var err_loc2 = [];
+        var err1 = [];
+        var err2 = [];
+        var err_loc = [];
         if (file1.length < file2.length) {
           num = file2.length;
         } else {
@@ -24,16 +25,24 @@ function test_files() {
         for (var i=0; i < num; i++) {
           if (file1.charAt(i) !== file2.charAt(i)) {
             count++;
-            err_loc1.push(file1.charAt(i) + " at position " + i);
-            err_loc2.push(file2.charAt(i) + " at position " + i);
+            err1.push(file1.charAt(i));
+            err2.push(file2.charAt(i));
+            err_loc.push(i);
           }
         }
         console.log("Files failed test.");
         console.log("Number of discrepencies: " + count);
-        console.log("Discrepencies in first file:");
-        console.log(err_loc1);
-        console.log("Discrepencies in second file:");
-        console.log(err_loc2);
+        console.log("Text files containing discrepencies written.");
+        fs.writeFile("./error_locations.txt", err_loc, function(err) {
+          if (err) throw err;
+        });
+        fs.writeFile("./error_content1.txt", err1, function(err) {
+          if (err) throw err;
+        });
+        fs.writeFile("./error_content2.txt", err2, function(err) {
+          if (err) throw err;
+        });
+
       }
     });
   });
