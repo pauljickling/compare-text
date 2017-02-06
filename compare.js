@@ -32,16 +32,6 @@ function test_files() {
         }
         console.log("Files failed test.");
         console.log("Number of discrepencies: " + count);
-        console.log("Text files containing discrepencies written.");
-        fs.writeFile("./error_locations.txt", err_loc, function(err) {
-          if (err) throw err;
-        });
-        fs.writeFile("./error_content1.txt", err1, function(err) {
-          if (err) throw err;
-        });
-        fs.writeFile("./error_content2.txt", err2, function(err) {
-          if (err) throw err;
-        });
 
       }
     });
